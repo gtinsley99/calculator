@@ -1,38 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&family=Roboto&display=swap");
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(31, 27, 41);
+  font-family: "Orbitron", sans-serif;
+}
+
 .App {
-  text-align: center;
+  background-color: white;
+  width: 500px;
+  height: 550px;
+  margin-top: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid white;
+  box-shadow: 5px 10px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.calculator {
+  width: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: rgb(104, 104, 104);
+  height: 90%;
+  padding: 15px;
+  border-radius: 5%;
+  border: 2px solid lightgray;
+}
+
+.outputBox {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 400px;
+  min-height: 55px;
+  background-color: lightgrey;
+  padding: 0px 10px;
+  border-radius: 10%;
+}
+
+.buttonLayout {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+
+button {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  width: 20%;
+  background-color: white;
+  color: black;
+  height: 70px;
+  border-radius: 10%;
+  box-shadow: 2px 4px;
+  margin: 5px;
+  font-size: 35px;
+  transition: 0.1s;
+  border: 1px solid black;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover {
+  cursor: pointer;
+  background-color: rgb(199, 197, 197);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button:active {
+  -webkit-transform: translateY(5px);
+  transform: translateY(5px);
+}
+
+.button-C{
+  background-color: orange;
+}
+
+.button-0{
+  width:50px;
+  font-size: 20px;
+  height: 70px;
+}
+.button-1{
+  width:50px;
+  height: 70px;
+}
+.button-2{
+  width:50px;
+  height: 70px;
+}
+.button-3{
+  width:50px;
+  height: 70px;
+}
+.button-4{
+  width:50px;;
+  height: 70px;
+}
+.button-5{
+  width:50px;
+  height: 70px;
+}
+.button-9{
+background-color: orange;
+}
+.button-20{
+  width:60px;
+  height: 70px;
+}
+.button-19{
+  width:60px;
+  height: 70px;
+}
+.button-21{
+  width:60px;
+  height: 70px;
 }
