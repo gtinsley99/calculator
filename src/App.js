@@ -21,6 +21,7 @@ function App() {
       case "9":
       case "0":
       case "+":
+      case "e":
       case "/":
       case "*":
       case "-":
@@ -58,6 +59,8 @@ function App() {
     "=",
   ];
 
+  let totalSum = 0;
+
   const handleClick = (button) => {
     switch (button) {
       case "=":
@@ -66,9 +69,10 @@ function App() {
       case "C":
       case "c":
         setSum("");
+        totalSum = "";
         break;
       case "√":
-        setSum(sum + "√(") 
+        setSum(sum + "sqrt(");
         break;
       default:
         setSum(sum + button);
@@ -92,8 +96,11 @@ function App() {
     <div className="App">
       <div className="calculator">
         <div className="outputBox">
-          <div className="outputText">
+          <div className="output">
             <h2>{sum}</h2>
+          </div>
+          <div className="output">
+            <h2>{evaluate(sum)}</h2>
           </div>
         </div>
         <div className="buttonLayout">{signs}</div>
