@@ -40,6 +40,7 @@ function App() {
     "√",
     "(",
     ")",
+    "del",
     "7",
     "8",
     "9",
@@ -60,19 +61,29 @@ function App() {
   ];
 
   let totalSum = 0;
-
+  let prevAns = 0;
+ 
   const handleClick = (button) => {
     switch (button) {
       case "=":
         setSum(evaluate(sum));
+        prevAns = sum;
         break;
       case "C":
       case "c":
         setSum("");
         totalSum = "";
         break;
+      case "del":
+        let newStr = sum;
+        newStr = newStr.substring(0, newStr.length - 1);
+        setSum(newStr);
+        break;
       case "√":
         setSum(sum + "sqrt(");
+        break;
+      case "Ans":
+        setSum(sum + prevAns);
         break;
       default:
         setSum(sum + button);
@@ -100,7 +111,7 @@ function App() {
             <h2>{sum}</h2>
           </div>
           <div className="output">
-            <h2>{evaluate(sum)}</h2>
+            <h2>(answer)</h2>
           </div>
         </div>
         <div className="buttonLayout">{signs}</div>
