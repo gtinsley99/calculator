@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { evaluate } from "mathjs";
+import { create, all, evaluate} from "mathjs";
 import "./App.css";
 
 function App() {
+  const config = {};
+  const math = create(all, config);
   document.addEventListener("keydown", (e) => {
     let pressed = `${e.key}`;
     switch (pressed) {
@@ -60,19 +62,16 @@ function App() {
     "=",
   ];
 
-  let totalSum = 0;
-  let prevAns = 0;
- 
+  
+
   const handleClick = (button) => {
     switch (button) {
-      case "=":
-        setSum(evaluate(sum));
-        prevAns = sum;
+      case "=": 
+        setSum(math.format(evaluate(sum), {precision: (14)}));
         break;
       case "C":
       case "c":
         setSum("");
-        totalSum = "";
         break;
       case "del":
         let newStr = sum;
@@ -82,9 +81,9 @@ function App() {
       case "√":
         setSum(sum + "sqrt(");
         break;
-      case "Ans":
-        setSum(sum + prevAns);
-        break;
+      // case "ANS":
+      //   setSum(sum + prevAns);
+      //   break;
       default:
         setSum(sum + button);
     }
