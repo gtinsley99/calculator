@@ -9,9 +9,10 @@ function App() {
 
   const [sum, setSum] = useState("");
 
-  const [ans, setAns] = useState("");
+  const [answer, setAnswer] = useState("");
 
   const [prevAns, setPrevAns] = useState("");
+
 
   const buttons = [
     "ANS",
@@ -40,24 +41,55 @@ function App() {
     "=",
   ];
 
+  // Change answer as long as no error
+  const tryNewAns = (button) => {
+    let newSum = "";
+    setSum(sum + button);
+    try {
+      newSum = math.format(evaluate(sum + button), { precision: 14 });
+      setAnswer(newSum);
+    } catch (e) {
+      if (e instanceof SyntaxError) {
+        return;
+      } else {
+        throw e;
+      }
+    }
+  };
+
+  // Delete last index from string
+  const removeLastString = () => {
+    let newStr = sum;
+    newStr = newStr.substring(0, newStr.length - 1);
+    setSum(newStr);
+  };
+
+  // Evaluate sum
+  const evalSum = () => {
+    setSum(math.format(evaluate(sum), { precision: 14 }));
+    let oldAns = math.format(evaluate(sum), { precision: 14 });
+    setPrevAns(oldAns);
+  };
+
+  // keypress adds to sum
   const handleKeyPress = (e) => {
     e.preventDefault();
-    let pressed = `${e.key}`;
-    switch (pressed) {
+    let button = `${e.key}`;
+    switch (button) {
       case "c":
       case "C":
         setSum("");
+        setAnswer("");
         break;
       case "=":
       case "Enter":
-        setSum(math.format(evaluate(sum), { precision: 14 }));
+        evalSum();
         break;
       case "Backspace":
       case "Delete":
-        let newStr = sum;
-        newStr = newStr.substring(0, newStr.length - 1);
-        setSum(newStr);
+        removeLastString();
         break;
+      case "0":
       case "1":
       case "2":
       case "3":
@@ -67,42 +99,57 @@ function App() {
       case "7":
       case "8":
       case "9":
-      case "0":
+      case ")":
+        tryNewAns(button);
+        break;
       case "+":
       case "e":
       case "/":
       case "*":
       case "-":
-      case ".":  
+      case ".":
       case "^":
-        setSum(sum + pressed);
+      case "(":
+        setSum(sum + button);
         break;
       default:
         return;
     }
   };
 
+  // buttons add to sum on press
   const handleClick = (button) => {
     switch (button) {
       case "=":
-        setSum(math.format(evaluate(sum), { precision: 14 }));
-        let oldAns = math.format(evaluate(sum), { precision: 14 });
-        setPrevAns(oldAns);
+        evalSum();
         break;
       case "C":
       case "c":
         setSum("");
+        setAnswer("");
         break;
       case "del":
-        let newStr = sum;
-        newStr = newStr.substring(0, newStr.length - 1);
-        setSum(newStr);
+        removeLastString();
         break;
       case "√":
         setSum(sum + "sqrt(");
         break;
       case "ANS":
         setSum(sum + prevAns);
+        break;
+      case "0":
+      case "1":
+      case "2":
+      case "3":
+      case "4":
+      case "5":
+      case "6":
+      case "7":
+      case "8":
+      case "9":
+      case "e":
+      case ")":
+        tryNewAns(button);
         break;
       default:
         setSum(sum + button);
@@ -131,10 +178,12 @@ function App() {
               <h2>{sum}</h2>
             </div>
             <div className="output">
-              <h2>{ans}</h2>
+              <h2>{answer}</h2>
             </div>
           </div>
-          <div className="buttonLayout">{signs}</div>
+          <div className="buttonLayout">
+            {signs}
+          </div>
         </div>
       </div>
     </div>
