@@ -9,6 +9,10 @@ function App() {
 
   const [sum, setSum] = useState("");
 
+  const [ans, setAns] = useState("");
+
+  const [prevAns, setPrevAns] = useState("");
+
   const buttons = [
     "ANS",
     "^",
@@ -82,6 +86,8 @@ function App() {
     switch (button) {
       case "=":
         setSum(math.format(evaluate(sum), { precision: 14 }));
+        let oldAns = math.format(evaluate(sum), { precision: 14 });
+        setPrevAns(oldAns);
         break;
       case "C":
       case "c":
@@ -95,9 +101,9 @@ function App() {
       case "√":
         setSum(sum + "sqrt(");
         break;
-      // case "ANS":
-      //   setSum(sum + prevAns);
-      //   break;
+      case "ANS":
+        setSum(sum + prevAns);
+        break;
       default:
         setSum(sum + button);
     }
@@ -125,7 +131,7 @@ function App() {
               <h2>{sum}</h2>
             </div>
             <div className="output">
-              <h2>(answer)</h2>
+              <h2>{ans}</h2>
             </div>
           </div>
           <div className="buttonLayout">{signs}</div>
