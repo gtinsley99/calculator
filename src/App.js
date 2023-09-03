@@ -136,6 +136,7 @@ function App() {
         break;
       case "ANS":
         setSum(sum + prevAns);
+        tryNewAns(prevAns);
         break;
       case "0":
       case "1":
